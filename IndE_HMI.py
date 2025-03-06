@@ -6,7 +6,6 @@ import csv
 Datalog_ = DataLog._Datalog()
 Datalog_._DateTimeUpdate()
 
-
-while True:
-    Datalog_._DateTimeUpdate()
-    print(Datalog_._DateTime.strftime("%H:%M:%S.%f"))
+Datalog_._DateTimeUpdate()
+print(Datalog_._Battery1._Voltage1._ID)
+print(Datalog_._Battery1._Voltage1._value)
