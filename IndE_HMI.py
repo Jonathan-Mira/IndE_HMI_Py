@@ -6,6 +6,8 @@ import csv
 Datalog_ = DataLog._Datalog()
 Datalog_._DateTimeUpdate()
 
+Datalog_._FileOpen('IndE_HMI.csv')
+Datalog_._FileWrite()
 Datalog_._DateTimeUpdate()
-print(Datalog_._Battery1._Voltage1._ID)
-print(Datalog_._Battery1._Voltage1._value)
+Datalog_._FileWrite()
+Datalog_._FileClose()
