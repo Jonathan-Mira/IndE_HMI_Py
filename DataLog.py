@@ -24,6 +24,9 @@ class _Battery:
 
 
 class _Datalog:
+
+    def __init__(self):
+        self._DateTimeUpdate()
    
     #Data Exporting Variables and Functions
     _filename = -1

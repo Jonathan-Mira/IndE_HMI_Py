@@ -1,0 +1,50 @@
+#:kivy 2.3.1
+
+<IndE_HMI_Manager>:
+    HomeScreen: 
+
+<HomeScreen>:
+    name: HomeScreen 
+
+    floatlayout: 
+        IndE_Display
+
+
+<Indicator>
+    canvas:
+        Ellipse:
+            pos: self.pos
+            size: 50,50
+
+<IndE_Display>:
+    emergancyindicator: emergancy_stop_indicator
+
+    canvas.before:
+        Color:
+            rgba: 0, 0.75, 0.75, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    
+    canvas:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: 0, self.height 
+            size: self.width, -self.height/10
+
+    Label:
+        font_size: 70  
+        center_x: root.width/10
+        top: root.height
+        text: str(root.datestring) 
+    
+    Label:
+        font_size: 70  
+        center_x: root.width/2
+        top: root.height
+        text: str(root.timestring)
+
+    
+
+
