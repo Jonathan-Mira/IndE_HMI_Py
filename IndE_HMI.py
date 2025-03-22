@@ -29,6 +29,7 @@ class IndE_Display(Widget):
     timestring = StringProperty()
     datestring = StringProperty()
     page = NumericProperty(0)
+    pagestring = StringProperty("Home")
     Temp_status = ColorProperty(Blue_)
     Battery_status = ColorProperty(Blue_)
     Emergancy_status = ColorProperty(Blue_)
@@ -53,6 +54,17 @@ class IndE_Display(Widget):
     Dr_Mode_Drive_status = ColorProperty(Blue_)
     DataLog_._DriveMode._value = -1
 
+    #Battery Screen
+    currentstring = StringProperty("Current: ###.#A")
+    DataLog_._BatteryCurrent._value = 100.0
+    BMS_status = ColorProperty(Blue_)
+    MaxTempBatAstring = StringProperty("A00")
+    MaxTempBatBstring = StringProperty("B00")
+    MaxTempBatCstring = StringProperty("C00")
+    MaxTempBatDstring = StringProperty("D00")
+    MaxTempBatEstring = StringProperty("E00")
+    MaxTempBatFstring = StringProperty("F00")
+    LowChargestring = StringProperty("100%")
 
 
 
@@ -93,6 +105,15 @@ class IndE_Display(Widget):
             self.Dr_Mode_Rev_status = Red_
             self.Dr_Mode_Slow_status = Red_
             self.Dr_Mode_Drive_status = Red_
+        #Battery Screen
+        self.currentstring = str(DataLog_._BatteryCurrent._value) + "A"
+        self.MaxTempBatAstring = str(DataLog_._BatTempA._HighestTemp())
+        self.MaxTempBatBstring = str(DataLog_._BatTempB._HighestTemp())
+        self.MaxTempBatCstring = str(DataLog_._BatTempC._HighestTemp())
+        self.MaxTempBatDstring = str(DataLog_._BatTempD._HighestTemp())
+        self.MaxTempBatEstring = str(DataLog_._BatTempE._HighestTemp())
+        self.MaxTempBatFstring = str(DataLog_._BatTempF._HighestTemp())
+        #self.LowChargestring = str(min(DataLog_._BatPair1._Capacity._value,DataLog_._BatPair2._Capacity._value,DataLog_._BatPair3._Capacity._value)) +"%"
 
             
 
@@ -117,21 +138,26 @@ class IndE_Display(Widget):
             case -1: 
                 self.but1string = "Record"
                 self.but2string = ""
+                self.pagestring = "Setting"
             case 0:
                 self.but1string = "Record"
                 if self.speedswitch:
                     self.but2string = "RPM"
                 else:
                     self.but2string = "km/h"
+                self.pagestring = "Home"
             case 1:
                 self.but1string = ""
                 self.but2string = ""
+                self.pagestring = "Battery"
             case 2:
                 self.but1string = "Home"
                 self.but2string = "Toggle"
+                self.pagestring = "Motor"
             case 3:
                 self.but1string = "Home"
                 self.but2string = ""
+                self.pagestring = "Misc"
             case _:
                 print(self.page)
 

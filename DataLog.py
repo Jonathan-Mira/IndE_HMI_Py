@@ -8,8 +8,8 @@ class _Data:
     _ID = -1
     _value = -1
 
-class _Battery:
-    def __init__(self, CapID, V1ID, V2ID, V3ID, V4ID, V5ID, V6ID, V7ID, V8ID, T1ID, T2ID):
+class _BatteryPair:
+    def __init__(self, CapID, V1ID, V2ID, V3ID, V4ID, V5ID, V6ID, V7ID, V8ID):
         self._Capacity = _Data(CapID)
         self._Voltage1 = _Data(V1ID)
         self._Voltage2 = _Data(V2ID)
@@ -19,8 +19,17 @@ class _Battery:
         self._Voltage6 = _Data(V6ID)
         self._Voltage7 = _Data(V7ID)
         self._Voltage8 = _Data(V8ID)
+
+class _BatteryTemp:
+    def __init__(self, T1ID, T2ID, T3ID, T4ID):
         self._Temp1 = _Data(T1ID)
         self._Temp2 = _Data(T2ID)
+        self._Temp3 = _Data(T3ID)
+        self._Temp4 = _Data(T4ID)
+
+    def _HighestTemp(self):
+        return min(self._Temp1._value, self._Temp2._value, self._Temp3._value, self._Temp4._value)
+            
 
 
 class _Datalog:
@@ -55,37 +64,30 @@ class _Datalog:
                                         'Motor Vector 4', 'Motor Vector 5', 'Motor Vector 6',\
                                         \
                                     \
-                                        'Battery Current', 'BMS 1 Status', 'BMS 2 Status',\
+                                        'Battery Current', 'BMS Status',\
                                         \
                                     \
-                                        'Battery 1 Capacity', 'Battery 1 Temp 1', 'Battery 1 Temp 2',\
-                                        'Battery 1 Voltage 1', 'Battery 1 Voltage 2', 'Battery 1 Voltage 3', 'Battery 1 Voltage 4',\
-                                        'Battery 1 Voltage 5', 'Battery 1 Voltage 6', 'Battery 1 Voltage 7', 'Battery 1 Voltage 8',\
+                                        'Battery Pair 1 Capacity',\
+                                        'Battery Pair 1 Voltage 1', 'Battery Pair 1 Voltage 2', 'Battery Pair 1 Voltage 3', 'Battery Pair 1 Voltage 4',\
+                                        'Battery Pair 1 Voltage 5', 'Battery Pair 1 Voltage 6', 'Battery Pair 1 Voltage 7', 'Battery Pair 1 Voltage 8',\
                                         \
                                     \
-                                        'Battery 2 Capacity', 'Battery 2 Temp 1', 'Battery 2 Temp 2',\
-                                        'Battery 2 Voltage 1', 'Battery 2 Voltage 2', 'Battery 2 Voltage 3', 'Battery 2 Voltage 4',\
-                                        'Battery 2 Voltage 5', 'Battery 2 Voltage 6', 'Battery 2 Voltage 7', 'Battery 2 Voltage 8',\
+                                        'Battery Pair 2 Capacity',\
+                                        'Battery Pair 2 Voltage 1', 'Battery Pair 2 Voltage 2', 'Battery Pair 2 Voltage 3', 'Battery Pair 2 Voltage 4',\
+                                        'Battery Pair 2 Voltage 5', 'Battery Pair 2 Voltage 6', 'Battery Pair 2 Voltage 7', 'Battery Pair 2 Voltage 8',\
                                         \
                                     \
-                                        'Battery 3 Capacity', 'Battery 3 Temp 1', 'Battery 3 Temp 2',\
-                                        'Battery 3 Voltage 1', 'Battery 3 Voltage 2', 'Battery 3 Voltage 3', 'Battery 3 Voltage 4',\
-                                        'Battery 3 Voltage 5', 'Battery 3 Voltage 6', 'Battery 3 Voltage 7', 'Battery 3 Voltage 8',\
+                                        'Battery Pair 3 Capacity',\
+                                        'Battery Pair 3 Voltage 1', 'Battery Pair 3 Voltage 2', 'Battery Pair 3 Voltage 3', 'Battery Pair 3 Voltage 4',\
+                                        'Battery Pair 3 Voltage 5', 'Battery Pair 3 Voltage 6', 'Battery Pair 3 Voltage 7', 'Battery Pair 3 Voltage 8',\
                                         \
                                     \
-                                        'Battery 4 Capacity', 'Battery 4 Temp 1', 'Battery 4 Temp 2',\
-                                        'Battery 4 Voltage 1', 'Battery 4 Voltage 2', 'Battery 4 Voltage 3', 'Battery 4 Voltage 4',\
-                                        'Battery 4 Voltage 5', 'Battery 4 Voltage 6', 'Battery 4 Voltage 7', 'Battery 4 Voltage 8',\
-                                        \
-                                    \
-                                        'Battery 5 Capacity', 'Battery 5 Temp 1', 'Battery 5 Temp 2',\
-                                        'Battery 5 Voltage 1', 'Battery 5 Voltage 2', 'Battery 5 Voltage 3', 'Battery 5 Voltage 4',\
-                                        'Battery 5 Voltage 5', 'Battery 5 Voltage 6', 'Battery 5 Voltage 7', 'Battery 5 Voltage 8',\
-                                        \
-                                    \
-                                        'Battery 6 Capacity', 'Battery 6 Temp 1', 'Battery 6 Temp 2',\
-                                        'Battery 6 Voltage 1', 'Battery 6 Voltage 2', 'Battery 6 Voltage 3', 'Battery 6 Voltage 4',\
-                                        'Battery 6 Voltage 5', 'Battery 6 Voltage 6', 'Battery 6 Voltage 7', 'Battery 6 Voltage 8'\
+                                        'Battery A Temp 1', 'Battery A Temp 2', 'Battery A Temp 3', 'Battery A Temp 4',\
+                                        'Battery B Temp 1', 'Battery B Temp 2', 'Battery B Temp 3', 'Battery B Temp 4',\
+                                        'Battery C Temp 1', 'Battery C Temp 2', 'Battery C Temp 3', 'Battery C Temp 4',\
+                                        'Battery D Temp 1', 'Battery D Temp 2', 'Battery D Temp 3', 'Battery D Temp 4',\
+                                        'Battery E Temp 1', 'Battery E Temp 2', 'Battery E Temp 3', 'Battery E Temp 4',\
+                                        'Battery F Temp 1', 'Battery F Temp 2', 'Battery F Temp 3', 'Battery F Temp 4',\
                                 ])
         #Addes the Variable ID to the CSV File
         self._CSVWriter.writerow(['', '',\
@@ -105,37 +107,30 @@ class _Datalog:
                                         self._MotorVector4._ID, self._MotorVector5._ID, self._MotorVector6._ID,\
                                         \
                                     \
-                                        self._BatteryCurrent._ID, self._BMS1Status._ID, self._BMS2Status._ID,\
+                                        self._BatteryCurrent._ID, self._BMS1Status._ID,\
                                         \
                                     \
-                                        self._Battery1._Capacity._ID, self._Battery1._Temp1._ID, self._Battery1._Temp2._ID,\
-                                        self._Battery1._Voltage1._ID, self._Battery1._Voltage2._ID, self._Battery1._Voltage3._ID, self._Battery1._Voltage4._ID,\
-                                        self._Battery1._Voltage5._ID, self._Battery1._Voltage6._ID, self._Battery1._Voltage7._ID, self._Battery1._Voltage8._ID,\
+                                        self._BatPair1._Capacity._ID,\
+                                        self._BatPair1._Voltage1._ID, self._BatPair1._Voltage2._ID, self._BatPair1._Voltage3._ID, self._BatPair1._Voltage4._ID,\
+                                        self._BatPair1._Voltage5._ID, self._BatPair1._Voltage6._ID, self._BatPair1._Voltage7._ID, self._BatPair1._Voltage8._ID,\
                                         \
                                     \
-                                        self._Battery2._Capacity._ID, self._Battery2._Temp1._ID, self._Battery2._Temp2._ID,\
-                                        self._Battery2._Voltage1._ID, self._Battery2._Voltage2._ID, self._Battery2._Voltage3._ID, self._Battery2._Voltage4._ID,\
-                                        self._Battery2._Voltage5._ID, self._Battery2._Voltage6._ID, self._Battery2._Voltage7._ID, self._Battery2._Voltage8._ID,\
+                                        self._BatPair2._Capacity._ID,\
+                                        self._BatPair2._Voltage1._ID, self._BatPair2._Voltage2._ID, self._BatPair2._Voltage3._ID, self._BatPair2._Voltage4._ID,\
+                                        self._BatPair2._Voltage5._ID, self._BatPair2._Voltage6._ID, self._BatPair2._Voltage7._ID, self._BatPair2._Voltage8._ID,\
                                         \
                                     \
-                                        self._Battery3._Capacity._ID, self._Battery3._Temp1._ID, self._Battery3._Temp2._ID,\
-                                        self._Battery3._Voltage1._ID, self._Battery3._Voltage2._ID, self._Battery3._Voltage3._ID, self._Battery3._Voltage4._ID,\
-                                        self._Battery3._Voltage5._ID, self._Battery3._Voltage6._ID, self._Battery3._Voltage7._ID, self._Battery3._Voltage8._ID,\
+                                        self._BatPair3._Capacity._ID,\
+                                        self._BatPair3._Voltage1._ID, self._BatPair3._Voltage2._ID, self._BatPair3._Voltage3._ID, self._BatPair3._Voltage4._ID,\
+                                        self._BatPair3._Voltage5._ID, self._BatPair3._Voltage6._ID, self._BatPair3._Voltage7._ID, self._BatPair3._Voltage8._ID,\
                                         \
                                     \
-                                        self._Battery4._Capacity._ID, self._Battery4._Temp1._ID, self._Battery4._Temp2._ID,\
-                                        self._Battery4._Voltage1._ID, self._Battery4._Voltage2._ID, self._Battery4._Voltage3._ID, self._Battery4._Voltage4._ID,\
-                                        self._Battery4._Voltage5._ID, self._Battery4._Voltage6._ID, self._Battery4._Voltage7._ID, self._Battery4._Voltage8._ID,\
-                                        \
-                                    \
-                                        self._Battery5._Capacity._ID, self._Battery5._Temp1._ID, self._Battery5._Temp2._ID,\
-                                        self._Battery5._Voltage1._ID, self._Battery5._Voltage2._ID, self._Battery5._Voltage3._ID, self._Battery5._Voltage4._ID,\
-                                        self._Battery5._Voltage5._ID, self._Battery5._Voltage6._ID, self._Battery5._Voltage7._ID, self._Battery5._Voltage8._ID,\
-                                        \
-                                    \
-                                        self._Battery6._Capacity._ID, self._Battery6._Temp1._ID, self._Battery6._Temp2._ID,\
-                                        self._Battery6._Voltage1._ID, self._Battery6._Voltage2._ID, self._Battery6._Voltage3._ID, self._Battery6._Voltage4._ID,\
-                                        self._Battery6._Voltage5._ID, self._Battery6._Voltage6._ID, self._Battery6._Voltage7._ID, self._Battery6._Voltage8._ID\
+                                        self._BatTempA._Temp1._ID, self._BatTempA._Temp2._ID, self._BatTempA._Temp3._ID, self._BatTempA._Temp4._ID,\
+                                        self._BatTempB._Temp1._ID, self._BatTempB._Temp2._ID, self._BatTempB._Temp3._ID, self._BatTempB._Temp4._ID,\
+                                        self._BatTempC._Temp1._ID, self._BatTempC._Temp2._ID, self._BatTempC._Temp3._ID, self._BatTempC._Temp4._ID,\
+                                        self._BatTempD._Temp1._ID, self._BatTempD._Temp2._ID, self._BatTempD._Temp3._ID, self._BatTempD._Temp4._ID,\
+                                        self._BatTempE._Temp1._ID, self._BatTempE._Temp2._ID, self._BatTempE._Temp3._ID, self._BatTempE._Temp4._ID,\
+                                        self._BatTempF._Temp1._ID, self._BatTempF._Temp2._ID, self._BatTempF._Temp3._ID, self._BatTempF._Temp4._ID,\
                                 ])
 
         
@@ -158,37 +153,30 @@ class _Datalog:
                                         self._MotorVector4._value, self._MotorVector5._value, self._MotorVector6._value,\
                                         \
                                     \
-                                        self._BatteryCurrent._value, self._BMS1Status._value, self._BMS2Status._value,\
+                                        self._BatteryCurrent._value, self._BMS1Status._value,\
                                         \
                                     \
-                                        self._Battery1._Capacity._value, self._Battery1._Temp1._value, self._Battery1._Temp2._value,\
-                                        self._Battery1._Voltage1._value, self._Battery1._Voltage2._value, self._Battery1._Voltage3._value, self._Battery1._Voltage4._value,\
-                                        self._Battery1._Voltage5._value, self._Battery1._Voltage6._value, self._Battery1._Voltage7._value, self._Battery1._Voltage8._value,\
+                                        self._BatPair1._Capacity._value,\
+                                        self._BatPair1._Voltage1._value, self._BatPair1._Voltage2._value, self._BatPair1._Voltage3._value, self._BatPair1._Voltage4._value,\
+                                        self._BatPair1._Voltage5._value, self._BatPair1._Voltage6._value, self._BatPair1._Voltage7._value, self._BatPair1._Voltage8._value,\
                                         \
                                     \
-                                        self._Battery2._Capacity._value, self._Battery2._Temp1._value, self._Battery2._Temp2._value,\
-                                        self._Battery2._Voltage1._value, self._Battery2._Voltage2._value, self._Battery2._Voltage3._value, self._Battery2._Voltage4._value,\
-                                        self._Battery2._Voltage5._value, self._Battery2._Voltage6._value, self._Battery2._Voltage7._value, self._Battery2._Voltage8._value,\
+                                        self._BatPair2._Capacity._value,\
+                                        self._BatPair2._Voltage1._value, self._BatPair2._Voltage2._value, self._BatPair2._Voltage3._value, self._BatPair2._Voltage4._value,\
+                                        self._BatPair2._Voltage5._value, self._BatPair2._Voltage6._value, self._BatPair2._Voltage7._value, self._BatPair2._Voltage8._value,\
                                         \
                                     \
-                                        self._Battery3._Capacity._value, self._Battery3._Temp1._value, self._Battery3._Temp2._value,\
-                                        self._Battery3._Voltage1._value, self._Battery3._Voltage2._value, self._Battery3._Voltage3._value, self._Battery3._Voltage4._value,\
-                                        self._Battery3._Voltage5._value, self._Battery3._Voltage6._value, self._Battery3._Voltage7._value, self._Battery3._Voltage8._value,\
+                                        self._BatPair3._Capacity._value,\
+                                        self._BatPair3._Voltage1._value, self._BatPair3._Voltage2._value, self._BatPair3._Voltage3._value, self._BatPair3._Voltage4._value,\
+                                        self._BatPair3._Voltage5._value, self._BatPair3._Voltage6._value, self._BatPair3._Voltage7._value, self._BatPair3._Voltage8._value,\
                                         \
                                     \
-                                        self._Battery4._Capacity._value, self._Battery4._Temp1._value, self._Battery4._Temp2._value,\
-                                        self._Battery4._Voltage1._value, self._Battery4._Voltage2._value, self._Battery4._Voltage3._value, self._Battery4._Voltage4._value,\
-                                        self._Battery4._Voltage5._value, self._Battery4._Voltage6._value, self._Battery4._Voltage7._value, self._Battery4._Voltage8._value,\
-                                        \
-                                    \
-                                        self._Battery5._Capacity._value, self._Battery5._Temp1._value, self._Battery5._Temp2._value,\
-                                        self._Battery5._Voltage1._value, self._Battery5._Voltage2._value, self._Battery5._Voltage3._value, self._Battery5._Voltage4._value,\
-                                        self._Battery5._Voltage5._value, self._Battery5._Voltage6._value, self._Battery5._Voltage7._value, self._Battery5._Voltage8._value,\
-                                        \
-                                    \
-                                        self._Battery6._Capacity._value, self._Battery6._Temp1._value, self._Battery6._Temp2._value,\
-                                        self._Battery6._Voltage1._value, self._Battery6._Voltage2._value, self._Battery6._Voltage3._value, self._Battery6._Voltage4._value,\
-                                        self._Battery6._Voltage5._value, self._Battery6._Voltage6._value, self._Battery6._Voltage7._value, self._Battery6._Voltage8._value\
+                                        self._BatTempA._Temp1._value, self._BatTempA._Temp2._value, self._BatTempA._Temp3._value, self._BatTempA._Temp4._value,\
+                                        self._BatTempB._Temp1._value, self._BatTempB._Temp2._value, self._BatTempB._Temp3._value, self._BatTempB._Temp4._value,\
+                                        self._BatTempC._Temp1._value, self._BatTempC._Temp2._value, self._BatTempC._Temp3._value, self._BatTempC._Temp4._value,\
+                                        self._BatTempD._Temp1._value, self._BatTempD._Temp2._value, self._BatTempD._Temp3._value, self._BatTempD._Temp4._value,\
+                                        self._BatTempE._Temp1._value, self._BatTempE._Temp2._value, self._BatTempE._Temp3._value, self._BatTempE._Temp4._value,\
+                                        self._BatTempF._Temp1._value, self._BatTempF._Temp2._value, self._BatTempF._Temp3._value, self._BatTempF._Temp4._value,\
                                 ])
         
     def _FileClose(self): #Close the file
@@ -235,14 +223,16 @@ class _Datalog:
     #Battery Variables
     _BatteryCurrent = _Data(0x121)
     _BMS1Status = _Data(0x188)
-    _BMS2Status = _Data(0x189)
-    #ID Refferance      (CapID, V1ID,  V2ID,  V3ID,  V4ID,  V5ID,  V6ID,  V7ID,  V8ID,  T1ID, T2ID):
-    _Battery1 = _Battery(0x134, 0x135, 0x136, 0x137, 0x138, 0x139, 0x140, 0x141, 0x142, 0x122, 0x123)
-    _Battery2 = _Battery(0x143, 0x144, 0x145, 0x146, 0x147, 0x148, 0x149, 0x150, 0x151, 0x124, 0x125)
-    _Battery3 = _Battery(0x152, 0x153, 0x154, 0x155, 0x156, 0x157, 0x158, 0x159, 0x160, 0x126, 0x127)
-    _Battery4 = _Battery(0x161, 0x162, 0x163, 0x164, 0x165, 0x166, 0x167, 0x168, 0x169, 0x128, 0x129)
-    _Battery5 = _Battery(0x170, 0x171, 0x172, 0x173, 0x174, 0x175, 0x176, 0x177, 0x178, 0x130, 0x131)
-    _Battery6 = _Battery(0x179, 0x180, 0x181, 0x182, 0x183, 0x184, 0x185, 0x186, 0x187, 0x132, 0x133)
-       
+    #ID Refferance          (CapID, V1ID,  V2ID,  V3ID,  V4ID,  V5ID,  V6ID,  V7ID,  V8ID,  T1ID,  T2ID,  T3ID,  T4ID,  T5ID,  T6ID,  T7ID,  T8ID):
+    _BatPair1 = _BatteryPair(0x134, 0x135, 0x136, 0x137, 0x138, 0x139, 0x140, 0x141, 0x142)
+    _BatPair2 = _BatteryPair(0x143, 0x144, 0x145, 0x146, 0x147, 0x148, 0x149, 0x150, 0x151)
+    _BatPair3 = _BatteryPair(0x152, 0x153, 0x154, 0x155, 0x156, 0x157, 0x158, 0x159, 0x160)
+    _BatTempA = _BatteryTemp(0x122, 0x123, 0x128, 0x129)
+    _BatTempB = _BatteryTemp(0x130, 0x131, 0x132, 0x133) 
+    _BatTempC = _BatteryTemp(0x124, 0x125, 0x161, 0x162) 
+    _BatTempD = _BatteryTemp(0x163, 0x164, 0x165, 0x166) 
+    _BatTempE = _BatteryTemp(0x126, 0x127, 0x167, 0x168) 
+    _BatTempF = _BatteryTemp(0x169, 0x170, 0x171, 0x172)   
+    
         
     

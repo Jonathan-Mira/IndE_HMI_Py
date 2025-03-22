@@ -53,17 +53,18 @@
         
     # Recording/Setting Page
         Color:
-            rgba: 1,1,0,1
-        Ellipse:
-            pos: (self.width/2)+(self.width*(self.page+1)), self.height/2
-            size: 50,50
-
-    #Battery Page
-        Color:
             rgba: 1,0,1,1
         Ellipse:
-            pos: (self.width/2)+(self.width*(self.page-1)), self.height/2
-            size: 50,50
+            pos: (self.width/2)+(self.width*(self.page+1)), self.height/2
+            size: root.height/9,root.height/9
+
+    #Battery Page
+        #BMS Indicator
+        Color:
+            rgba: root.BMS_status
+        Ellipse:
+            pos: (self.width/7)+(self.width*(self.page-1)), self.height*9/32
+            size: root.height/9,root.height/9
         
     #Motor Page
         Color:
@@ -95,9 +96,9 @@
     
     #Page
     Label:
-        text: str(root.page)
+        text: root.pagestring
         font_size: root.height/13  
-        center_x: root.width*3/4
+        center_x: root.width*11/16
         center_y: root.height*19/20
     
 #Home Page 
@@ -158,9 +159,107 @@
         center_y: root.height*10/16
         color: root.Dr_Mode_Slow_status
 
+#Battery Page 
+    #Speed
+    Label:
+        text: root.speedstring
+        font_size: root.height/6  
+        center_x: (root.width*11/50)+root.width*(root.page-1)
+        center_y: root.height*24/32
+        color: root.textcolor
+    #Current
+    Label:
+        text: "Current:"
+        font_size: root.height/12  
+        center_x: (root.width*11/100)+root.width*(root.page-1)
+        center_y: root.height*37/64
+        color: root.textcolor
+    Label:
+        text: root.currentstring
+        font_size: root.height/12  
+        center_x: (root.width*14/50)+root.width*(root.page-1)
+        center_y: root.height*37/64
+        color: root.textcolor
+    #BMS Status
+    Label:
+        text: "BMS Status"
+        font_size: root.height/16  
+        center_x: (root.width*7/40)+root.width*(root.page-1)
+        center_y: root.height*14/32
+        color: root.textcolor
+    #Max Battery Tempurature
+    Label:
+        text: "Hottest Battery Temp (°C)"
+        font_size: root.height/13  
+        center_x: (root.width*11/16)+root.width*(root.page-1)
+        center_y: root.height*13/16
+        color: root.textcolor
+    #Battery Label
+    Label:
+        text: "A:                B:\nC:                D:\nE:                F:"
+        font_size: root.height/13  
+        center_x: (root.width*79/128)+root.width*(root.page-1)
+        center_y: root.height*20/32
+        color: root.textcolor
+    #Battery A Max Tempurature
+    Label:
+        text: root.MaxTempBatAstring
+        font_size: root.height/13  
+        center_x: (root.width*75/128)+root.width*(root.page-1)
+        center_y: root.height*183/256
+        color: root.textcolor
+    #Battery B Max Tempurature
+    Label:
+        text: root.MaxTempBatBstring
+        font_size: root.height/13  
+        center_x: (root.width*99/128)+root.width*(root.page-1)
+        center_y: root.height*183/256
+        color: root.textcolor
+    #Battery C Max Tempurature
+    Label:
+        text: root.MaxTempBatCstring
+        font_size: root.height/13  
+        center_x: (root.width*75/128)+root.width*(root.page-1)
+        center_y: root.height*20/32
+        color: root.textcolor
+    #Battery D Max Tempurature
+    Label:
+        text: root.MaxTempBatDstring
+        font_size: root.height/13  
+        center_x: (root.width*99/128)+root.width*(root.page-1)
+        center_y: root.height*20/32
+        color: root.textcolor
+    #Battery E Max Tempurature
+    Label:
+        text: root.MaxTempBatEstring
+        font_size: root.height/13  
+        center_x: (root.width*75/128)+root.width*(root.page-1)
+        center_y: root.height*137/256
+        color: root.textcolor
+    #Battery F Max Tempurature
+    Label:
+        text: root.MaxTempBatFstring
+        font_size: root.height/13  
+        center_x: (root.width*99/128)+root.width*(root.page-1)
+        center_y: root.height*137/256
+        color: root.textcolor
+    #Charge label
+    Label:
+        text: "Charge:"
+        font_size: root.height/10  
+        center_x: (root.width*9/16)+root.width*(root.page-1)
+        center_y: root.height*3/8
+        color: root.textcolor
+    #Charge %
+    Label:
+        text: root.LowChargestring
+        font_size: root.height/10  
+        center_x: (root.width*47/64)+root.width*(root.page-1)
+        center_y: root.height*3/8
+        color: root.textcolor
 
     
-    #Change page buttons
+    #Buttons
     BoxLayout:
         orientation: "horizontal"
         center_y: 30
