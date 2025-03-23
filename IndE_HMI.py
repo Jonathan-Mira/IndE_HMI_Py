@@ -28,7 +28,7 @@ IndE_Blue = (0, 0.75, 0.75, 1)
 class IndE_Display(Widget):
     timestring = StringProperty()
     datestring = StringProperty()
-    page = NumericProperty(0)
+    page = NumericProperty(2)
     pagestring = StringProperty("Home")
     Temp_status = ColorProperty(Blue_)
     Battery_status = ColorProperty(Blue_)
@@ -66,6 +66,20 @@ class IndE_Display(Widget):
     MaxTempBatFstring = StringProperty("F00")
     LowChargestring = StringProperty("100%")
 
+    #Motor Screen
+    MSspeedstring = StringProperty()
+    MSrotationstring = StringProperty()
+    motortempstring = StringProperty()
+    motortorquestring = StringProperty()
+    motorcontrollertemp1string = StringProperty()
+    motorcontrollertemp2string = StringProperty()
+    motorcontrollertemp3string = StringProperty()
+    motorcontrollertemp4string = StringProperty()
+    motorcontrollertemp5string = StringProperty()
+    motorcontrollertemp6string = StringProperty()
+    phaseAcurrentstring = StringProperty("100")
+    phaseBcurrentstring = StringProperty("100")
+    phaseCcurrentstring = StringProperty("100")
 
 
     def update(self, dt):
@@ -105,6 +119,7 @@ class IndE_Display(Widget):
             self.Dr_Mode_Rev_status = Red_
             self.Dr_Mode_Slow_status = Red_
             self.Dr_Mode_Drive_status = Red_
+
         #Battery Screen
         self.currentstring = str(DataLog_._BatteryCurrent._value) + "A"
         self.MaxTempBatAstring = str(DataLog_._BatTempA._HighestTemp())
@@ -113,8 +128,23 @@ class IndE_Display(Widget):
         self.MaxTempBatDstring = str(DataLog_._BatTempD._HighestTemp())
         self.MaxTempBatEstring = str(DataLog_._BatTempE._HighestTemp())
         self.MaxTempBatFstring = str(DataLog_._BatTempF._HighestTemp())
-        #self.LowChargestring = str(min(DataLog_._BatPair1._Capacity._value,DataLog_._BatPair2._Capacity._value,DataLog_._BatPair3._Capacity._value)) +"%"
+        self.LowChargestring = str(min(DataLog_._BatPair1._Capacity._value,DataLog_._BatPair2._Capacity._value,DataLog_._BatPair3._Capacity._value)) +"%"
 
+        #Motor Screen
+        self.MSspeedstring = str(DataLog_._Speed._value) + " Km/h"
+        self.MSrotationstring = str(DataLog_._RPM._value) + " RPM"
+        self.motortempstring = str(DataLog_._MotorTemp._value) + "°C"
+        self.motortorquestring = str(DataLog_._MotorTorque._value) + "Nm"
+        self.motorcontrollertemp1string = str(DataLog_._ControllerTemp1._value)
+        self.motorcontrollertemp2string = str(DataLog_._ControllerTemp2._value)
+        self.motorcontrollertemp3string = str(DataLog_._ControllerTemp3._value)
+        self.motorcontrollertemp4string = str(DataLog_._ControllerTemp4._value)
+        self.motorcontrollertemp5string = str(DataLog_._ControllerTemp5._value)
+        self.motorcontrollertemp6string = str(DataLog_._ControllerTemp6._value)
+        self.phaseAcurrentstring = str(DataLog_._PhaseCurrentA._value) 
+        self.phaseBcurrentstring = str(DataLog_._PhaseCurrentB._value) 
+        self.phaseCcurrentstring = str(DataLog_._PhaseCurrentC._value) 
+        
             
 
         

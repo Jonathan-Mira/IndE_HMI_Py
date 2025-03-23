@@ -37,7 +37,7 @@
             pos: self.width*15/16, self.height*64/80
             size: root.height/13, root.height/13    
 
-    # Home Page
+# Home Screen
         #Break Indicator
         Color:
             rgba: root.Break_status
@@ -51,14 +51,14 @@
             pos: (self.width*12/14)+(self.width*self.page), self.height/3
             size: root.height/9,root.height/9
         
-    # Recording/Setting Page
+# Recording/Setting Screen
         Color:
             rgba: 1,0,1,1
         Ellipse:
             pos: (self.width/2)+(self.width*(self.page+1)), self.height/2
             size: root.height/9,root.height/9
 
-    #Battery Page
+    #Battery Screen
         #BMS Indicator
         Color:
             rgba: root.BMS_status
@@ -66,21 +66,21 @@
             pos: (self.width/7)+(self.width*(self.page-1)), self.height*9/32
             size: root.height/9,root.height/9
         
-    #Motor Page
-        Color:
-            rgba: 0,1,1,1
-        Ellipse:
-            pos: (self.width/2)+(self.width*(self.page-2)), self.height/2
-            size: 50,50
+    #Motor Screen
+#        Color:
+#            rgba: 0,1,1,1
+#        Ellipse:
+#            pos: (self.width/2)+(self.width*(self.page-2)), self.height/2
+#            size: 50,50
         
-    #Misc Page
+    #Misc Screen
         Color:
             rgba: 0,1,0,1
         Ellipse:
             pos: (self.width/2)+(self.width*(self.page-3)), self.height/2
             size: 50,50
             
-    #Display Date
+#Display Date
     Label:
         text: root.datestring 
         font_size: root.height/13 
@@ -101,7 +101,7 @@
         center_x: root.width*11/16
         center_y: root.height*19/20
     
-#Home Page 
+#Home Screen 
     #Speed
     Label:
         text: root.speedstring
@@ -159,7 +159,7 @@
         center_y: root.height*10/16
         color: root.Dr_Mode_Slow_status
 
-#Battery Page 
+#Battery Screen 
     #Speed
     Label:
         text: root.speedstring
@@ -258,8 +258,143 @@
         center_y: root.height*3/8
         color: root.textcolor
 
+#Motor Screen
+    #Speed
+    Label:
+        text: root.MSspeedstring
+        font_size: root.height/6  
+        center_x: (root.width*11/50)+root.width*(root.page-2)
+        center_y: root.height*24/32
+        color: root.textcolor
+    #Rotation
+    Label:
+        text: root.MSrotationstring
+        font_size: root.height/6  
+        center_x: (root.width*11/50)+root.width*(root.page-2)
+        center_y: root.height*19/32
+        color: root.textcolor
+    #Motor Temp Label
+    Label:
+        text: "Temp:"
+        font_size: root.height/10  
+        center_x: (root.width*8/64)+root.width*(root.page-2)
+        center_y: root.height*7/16
+        color: root.textcolor
+    #Motor Temp
+    Label:
+        text: root.motortempstring
+        font_size: root.height/10  
+        center_x: (root.width*19/64)+root.width*(root.page-2)
+        center_y: root.height*7/16
+        color: root.textcolor
+    #Motor Torque Label
+    Label:
+        text: "Torque:"
+        font_size: root.height/10  
+        center_x: (root.width*7/64)+root.width*(root.page-2)
+        center_y: root.height*5/16
+        color: root.textcolor
+    #Motor Torque
+    Label:
+        text: root.motortorquestring
+        font_size: root.height/10  
+        center_x: (root.width*19/64)+root.width*(root.page-2)
+        center_y: root.height*5/16
+        color: root.textcolor
+    #Motor Controller Tempurature
+    Label:
+        text: "Motor Controller Temp (°C)"
+        font_size: root.height/13  
+        center_x: (root.width*11/16)+root.width*(root.page-2)
+        center_y: root.height*13/16
+        color: root.textcolor
+    #Battery Label
+    Label:
+        text: "1:                2:\n3:                4:\n5:                6:"
+        font_size: root.height/13  
+        center_x: (root.width*79/128)+root.width*(root.page-2)
+        center_y: root.height*20/32
+        color: root.textcolor
+    #Motor Controller Tempurature 1
+    Label:
+        text: root.motorcontrollertemp1string
+        font_size: root.height/13  
+        center_x: (root.width*75/128)+root.width*(root.page-2)
+        center_y: root.height*183/256
+        color: root.textcolor
+    #Motor Controller Tempurature 2
+    Label:
+        text: root.motorcontrollertemp2string
+        font_size: root.height/13  
+        center_x: (root.width*99/128)+root.width*(root.page-2)
+        center_y: root.height*183/256
+        color: root.textcolor
+    #Motor Controller Tempurature 3
+    Label:
+        text: root.motorcontrollertemp3string
+        font_size: root.height/13  
+        center_x: (root.width*75/128)+root.width*(root.page-2)
+        center_y: root.height*20/32
+        color: root.textcolor
+    #Motor Controller Tempurature 4
+    Label:
+        text: root.motorcontrollertemp4string
+        font_size: root.height/13  
+        center_x: (root.width*99/128)+root.width*(root.page-2)
+        center_y: root.height*20/32
+        color: root.textcolor
+    #Motor Controller Tempurature 5
+    Label:
+        text: root.motorcontrollertemp5string
+        font_size: root.height/13  
+        center_x: (root.width*75/128)+root.width*(root.page-2)
+        center_y: root.height*137/256
+        color: root.textcolor
+    #Motor Controller Tempurature 6
+    Label:
+        text: root.motorcontrollertemp6string
+        font_size: root.height/13  
+        center_x: (root.width*99/128)+root.width*(root.page-2)
+        center_y: root.height*137/256
+        color: root.textcolor
+    #Phase Current Label
+    Label:
+        text: "Phase Current (A)"
+        font_size: root.height/13  
+        center_x: (root.width*21/32)+root.width*(root.page-2)
+        center_y: root.height*13/32
+        color: root.textcolor
+    #Current Label
+    Label:
+        text: "A:             B:            C:"
+        font_size: root.height/13  
+        center_x: (root.width*82/128)+root.width*(root.page-2)
+        center_y: root.height*20/64
+        color: root.textcolor
+    #Phase A Current
+    Label:
+        text: root.phaseAcurrentstring
+        font_size: root.height/13  
+        center_x: (root.width*35/64)+root.width*(root.page-2)
+        center_y: root.height*20/64
+        color: root.textcolor
+    #Phase B Current
+    Label:
+        text: root.phaseBcurrentstring
+        font_size: root.height/13  
+        center_x: (root.width*45/64)+root.width*(root.page-2)
+        center_y: root.height*20/64
+        color: root.textcolor
+    #Phase C Current
+    Label:
+        text: root.phaseCcurrentstring
+        font_size: root.height/13  
+        center_x: (root.width*55/64)+root.width*(root.page-2)
+        center_y: root.height*20/64
+        color: root.textcolor
+
     
-    #Buttons
+#Buttons
     BoxLayout:
         orientation: "horizontal"
         center_y: 30
