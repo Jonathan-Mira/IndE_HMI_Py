@@ -2,7 +2,7 @@
 
 <IndE_Display>:
     
-    #Black header bar
+#Black header bar
     canvas.before:
         Color:
             rgba: 0, 0, 0, 1
@@ -11,7 +11,7 @@
             size: self.width, -self.height/10
 
     canvas:
-    # All Page/Indicator
+# All Page/Indicator
         # E-Stop
         Color:
             rgba: self.Emergancy_status
@@ -52,11 +52,11 @@
             size: root.height/9,root.height/9
         
 # Recording/Setting Screen
-        Color:
-            rgba: 1,0,1,1
-        Ellipse:
-            pos: (self.width/2)+(self.width*(self.page+1)), self.height/2
-            size: root.height/9,root.height/9
+    #    Color:
+    #        rgba: 1,0,1,1
+    #    Ellipse:
+    #        pos: (self.width/2)+(self.width*(self.page+1)), self.height/2
+    #        size: root.height/9,root.height/9
 
     #Battery Screen
         #BMS Indicator
@@ -67,20 +67,20 @@
             size: root.height/9,root.height/9
         
     #Motor Screen
-#        Color:
-#            rgba: 0,1,1,1
-#        Ellipse:
-#            pos: (self.width/2)+(self.width*(self.page-2)), self.height/2
-#            size: 50,50
+    #    Color:
+    #        rgba: 0,1,1,1
+    #    Ellipse:
+    #        pos: (self.width/2)+(self.width*(self.page-2)), self.height/2
+    #        size: 50,50
         
     #Misc Screen
-        Color:
-            rgba: 0,1,0,1
-        Ellipse:
-            pos: (self.width/2)+(self.width*(self.page-3)), self.height/2
-            size: 50,50
+    #    Color:
+    #        rgba: 0,1,0,1
+    #    Ellipse:
+    #        pos: (self.width/2)+(self.width*(self.page-3)), self.height/2
+    #        size: 50,50
             
-#Display Date
+# Display Date
     Label:
         text: root.datestring 
         font_size: root.height/13 
@@ -391,6 +391,58 @@
         font_size: root.height/13  
         center_x: (root.width*55/64)+root.width*(root.page-2)
         center_y: root.height*20/64
+        color: root.textcolor
+
+#Setting Screen
+    #Speed
+    Label:
+        text: root.speedstring
+        font_size: root.height/6  
+        center_x: (root.width*11/50)+root.width*(root.page+1)
+        center_y: root.height*24/32
+        color: root.textcolor
+    #Motor Temp Label
+    Label:
+        text: "File:"
+        font_size: root.height/10  
+        center_x: (root.width*5/64)+root.width*(root.page+1)
+        center_y: root.height*19/32
+        color: root.textcolor
+    #Motor Temp
+    Label:
+        text: root.filenamestring
+        font_size: root.height/10  
+        center_x: (root.width*19/64)+root.width*(root.page+1)
+        center_y: root.height*19/32
+        color: root.textcolor
+    #Input File Name
+    TextInput:
+        id: filenameinput
+        center_x: (root.width*70/256)+root.width*(root.page+1)
+        center_y: root.height*7/16
+        width: root.width*8/27
+        height: root.height/10
+        font_size: root.height/16
+        multiline: False
+        on_text_validate: root.filenameupdate()
+    #Submit File Name Button
+    Button:
+        text: "Submit\nName"
+        font_size: root.height/28
+        center_x: (root.width*5/64)+root.width*(root.page+1)
+        center_y: root.height*7/16
+        size: root.width/11, root.height/10
+        on_release: root.filenameupdate()
+    
+
+
+#Misc Screen
+    #Speed
+    Label:
+        text: root.speedstring
+        font_size: root.height/6  
+        center_x: (root.width*11/50)+root.width*(root.page-3)
+        center_y: root.height*24/32
         color: root.textcolor
 
     

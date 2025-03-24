@@ -4,9 +4,6 @@ from enum import Enum
 import DataLog
 from kivy.app import App
 from kivy.uix.widget import Widget
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.button import Button
-from kivy.graphics import Color
 from kivy.core.window import Window
 Window.maximize() #Maximize the window
 Window.clearcolor = (0, 0.75, 0.75, 1) #Set the background color to IndE Blue
@@ -28,7 +25,7 @@ IndE_Blue = (0, 0.75, 0.75, 1)
 class IndE_Display(Widget):
     timestring = StringProperty()
     datestring = StringProperty()
-    page = NumericProperty(2)
+    page = NumericProperty(0)
     pagestring = StringProperty("Home")
     Temp_status = ColorProperty(Blue_)
     Battery_status = ColorProperty(Blue_)
@@ -80,6 +77,9 @@ class IndE_Display(Widget):
     phaseAcurrentstring = StringProperty("100")
     phaseBcurrentstring = StringProperty("100")
     phaseCcurrentstring = StringProperty("100")
+
+    #Setting Screen
+    filenamestring = StringProperty()
 
 
     def update(self, dt):
@@ -144,19 +144,16 @@ class IndE_Display(Widget):
         self.phaseAcurrentstring = str(DataLog_._PhaseCurrentA._value) 
         self.phaseBcurrentstring = str(DataLog_._PhaseCurrentB._value) 
         self.phaseCcurrentstring = str(DataLog_._PhaseCurrentC._value) 
-        
-            
 
-        
-        
+        #Setting Screen
     
+  
     def nextpage(self):
         self.page += 1
         if self.page > 3:
             self.page = -1
         self.update_Button_String()
         
-    
     def prevpage(self):
         self.page -= 1
         if self.page < -1:
@@ -209,6 +206,9 @@ class IndE_Display(Widget):
                 self.update_Button_String()
             case _:
                 print(self.page)
+    
+    def filenameupdate(self):
+        self.filenamestring = self.ids.filenameinput.text
         
 
 
