@@ -1,5 +1,6 @@
 import csv
 import datetime
+import os
 
 class _Data:
     def __init__(self, ID):
@@ -28,7 +29,7 @@ class _BatteryTemp:
         self._Temp4 = _Data(T4ID)
 
     def _HighestTemp(self):
-        return min(self._Temp1._value, self._Temp2._value, self._Temp3._value, self._Temp4._value)
+        return max(self._Temp1._value, self._Temp2._value, self._Temp3._value, self._Temp4._value)
             
 
 
@@ -36,14 +37,26 @@ class _Datalog:
 
     def __init__(self):
         self._DateTimeUpdate()
+
+    #Warning values
+    ControllerTempCaution = 90
+    ControllerTempWarning = 100
+    MotorTempCaution = 90
+    MotorTempWarning = 100
+    BatteryTempCaution = 40
+    BatteryTempWarning = 50
+    BatteryChargeCaution = 50
+    BatteryChargeWarning = 25
    
     #Data Exporting Variables and Functions
     _filename = -1
     _CSVFile = -1
     _CSVWriter = -1
     def _FileOpen(self, filename): #Opens a new file and put the headers
-        self._filename = filename
-        self._CSVFile = open(self._filename, 'w', newline='')
+        self._filename = filename + self._DateTime.strftime("_%Y-%m-%d_%H-%M-%S.csv")
+        if not os.path.exists("../IndE_Data/"):
+            os.mkdir("../IndE_Data/")
+        self._CSVFile = open("../IndE_Data/"+self._filename, 'w', newline='')
         self._CSVWriter = csv.writer(self._CSVFile)
         
         #Creates the Headers for the CSV File
@@ -207,7 +220,25 @@ class _Datalog:
     _ControllerTemp4 = _Data(0x106)
     _ControllerTemp5 = _Data(0x107)
     _ControllerTemp6 = _Data(0x108)
+        #Assumes all values are being updated and an -1 is the temp,
+        #and not non-updateing from default
+    def _OverTemp_Controller(self):
+        maxtemp = max(self._ControllerTemp1._value,self._ControllerTemp2._value,self._ControllerTemp3._value,\
+                      self._ControllerTemp4._value,self._ControllerTemp5._value,self._ControllerTemp6._value)
+        if maxtemp < self.ControllerTempCaution:
+            return 0
+        elif maxtemp < self.ControllerTempWarning:
+            return 1
+        else:
+            return 2
     _MotorTemp = _Data(0x109)
+    def _OverTemp_Motor(self):
+        if self._MotorTemp._value < self.MotorTempCaution:
+            return 0
+        elif self._MotorTemp._value < self.MotorTempWarning:
+            return 1
+        else:
+            return 2
     _PhaseCurrentA = _Data(0x110)
     _PhaseCurrentB = _Data(0x111)
     _PhaseCurrentC = _Data(0x112)
@@ -232,7 +263,30 @@ class _Datalog:
     _BatTempC = _BatteryTemp(0x124, 0x125, 0x161, 0x162) 
     _BatTempD = _BatteryTemp(0x163, 0x164, 0x165, 0x166) 
     _BatTempE = _BatteryTemp(0x126, 0x127, 0x167, 0x168) 
-    _BatTempF = _BatteryTemp(0x169, 0x170, 0x171, 0x172)   
+    _BatTempF = _BatteryTemp(0x169, 0x170, 0x171, 0x172)
+        #Assumes all values are being updated and an -1 is the temp,
+        #and not non-updateing from default
+    def _OverTemp_Battery(self):
+        maxtemp = max(self._BatTempA._HighestTemp(),self._BatTempB._HighestTemp(),self._BatTempC._HighestTemp(),\
+                      self._BatTempD._HighestTemp(),self._BatTempE._HighestTemp(),self._BatTempF._HighestTemp())
+        if maxtemp < self.BatteryTempCaution:
+            return 0
+        elif maxtemp < self.BatteryTempWarning:
+            return 1
+        else:
+            return 2
+        
+    def _LowerCharge(self):
+        mincharge =  min(self._BatPair1._Capacity._value,self._BatPair2._Capacity._value,self._BatPair3._Capacity._value)
+        if mincharge == -1:
+            return -1
+        elif mincharge > self.BatteryChargeCaution:
+            return 0
+        elif mincharge > self.BatteryChargeWarning:
+            return 1
+        else:
+            return 2
+
     
         
     

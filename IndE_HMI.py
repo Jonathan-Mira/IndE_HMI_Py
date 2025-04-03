@@ -1,6 +1,3 @@
-import sys
-import csv
-from enum import Enum
 import DataLog
 from kivy.app import App
 from kivy.uix.widget import Widget
@@ -9,7 +6,7 @@ Window.maximize() #Maximize the window
 Window.clearcolor = (0, 0.75, 0.75, 1) #Set the background color to IndE Blue
 from kivy.clock import Clock
 from kivy.properties import (
-    NumericProperty, ReferenceListProperty, ObjectProperty, StringProperty, ColorProperty
+    NumericProperty, StringProperty, ColorProperty
 )
 
 
@@ -19,7 +16,9 @@ Black_    = (0, 0, 0, 1)
 Red_      = (1, 0, 0, 1)
 Green_    = (0, 1, 0, 1)
 Blue_     = (0, 0, 1, 1)
+Yellow_   = (1, 1, 0, 1)
 IndE_Blue = (0, 0.75, 0.75, 1)
+IndE_Grey = (0.2, 0.7, 0.7, 1)
 
 
 class IndE_Display(Widget):
@@ -30,7 +29,7 @@ class IndE_Display(Widget):
     Temp_status = ColorProperty(Blue_)
     Battery_status = ColorProperty(Blue_)
     Emergancy_status = ColorProperty(Blue_)
-    Record_status = ColorProperty(Blue_)
+    Record_status = ColorProperty(IndE_Blue)
     Recording = False
     textcolor = ColorProperty(Black_)
     but1string = StringProperty("Record")
@@ -50,6 +49,9 @@ class IndE_Display(Widget):
     Dr_Mode_Slow_status = ColorProperty(Blue_)
     Dr_Mode_Drive_status = ColorProperty(Blue_)
     DataLog_._DriveMode._value = -1
+
+    DataLog_._WindShieldWiper._value = False
+    DataLog_._Brake._value = False
 
     #Battery Screen
     currentstring = StringProperty("Current: ###.#A")
@@ -88,6 +90,42 @@ class IndE_Display(Widget):
         self.datestring = DataLog_._DateTime.strftime("%Y/%m/%d")
         if self.Recording:
             DataLog_._FileWrite()
+        
+        if DataLog_._EmergencyStop._value:
+            self.Emergancy_status = Green_
+        else:
+            self.Emergancy_status = Red_
+        
+        match max(DataLog_._OverTemp_Controller(),DataLog_._OverTemp_Battery(),DataLog_._OverTemp_Motor()):
+            case 0:
+                self.Temp_status = Green_
+            case 1:
+                self.Temp_status = Yellow_
+            case 2:
+                self.Temp_status = Red_
+            case _:
+                self.Temp_status = Blue_
+
+        match DataLog_._LowerCharge():
+            case 0:
+                self.Battery_status = Green_
+            case 1:
+                self.Battery_status = Yellow_
+            case 2:
+                self.Battery_status = Red_
+            case _:
+                self.Battery_status = Blue_
+
+        if DataLog_._Brake._value:
+            self.Break_status = Green_
+        else:
+            self.Break_status = IndE_Grey
+
+        if DataLog_._WindShieldWiper._value:
+            self.Wind_Sheild_status = Green_
+        else:
+            self.Wind_Sheild_status = IndE_Grey
+
         #Home Screen
         if self.speedswitch:
             self.speedstring = str(DataLog_._Speed._value) + " Km/h"
@@ -129,6 +167,10 @@ class IndE_Display(Widget):
         self.MaxTempBatEstring = str(DataLog_._BatTempE._HighestTemp())
         self.MaxTempBatFstring = str(DataLog_._BatTempF._HighestTemp())
         self.LowChargestring = str(min(DataLog_._BatPair1._Capacity._value,DataLog_._BatPair2._Capacity._value,DataLog_._BatPair3._Capacity._value)) +"%"
+        if DataLog_._BMS1Status._value:
+            self.BMS_status = Green_
+        else:
+            self.BMS_status = Red_
 
         #Motor Screen
         self.MSspeedstring = str(DataLog_._Speed._value) + " Km/h"
@@ -147,7 +189,15 @@ class IndE_Display(Widget):
 
         #Setting Screen
     
-  
+    def record(self):
+        self.Recording = not self.Recording
+        if self.Recording:
+            DataLog_._FileOpen(self.filenamestring)
+            self.Record_status = Green_
+        else:
+            DataLog_._FileClose()
+            self.Record_status = IndE_Blue
+
     def nextpage(self):
         self.page += 1
         if self.page > 3:
@@ -190,6 +240,10 @@ class IndE_Display(Widget):
 
     def but1(self):
         match self.page:
+            case -1:
+                self.record()
+            case 0:
+                self.record()
             case 2:
                 self.page = 0
                 self.update_Button_String()
