@@ -9,7 +9,6 @@ from kivy.properties import (
     NumericProperty, StringProperty, ColorProperty
 )
 
-
 DataLog_ = DataLog._Datalog()
 White_    = (1, 1, 1, 1)
 Black_    = (0, 0, 0, 1)
