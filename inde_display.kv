@@ -10,6 +10,7 @@
             pos: 0, self.height 
             size: self.width, -self.height/10
 
+
 # All Page/Indicator
     canvas:
         # E-Stop
@@ -39,7 +40,7 @@
 
 
 
-# Home Screen
+# Home Screen Indicator
         #Break Indicator
         Color:
             rgba: root.Break_status
@@ -53,14 +54,14 @@
             pos: (self.width*12/14)+(self.width*self.page), self.height/3
             size: root.height/9,root.height/9
         
-# Recording/Setting Screen
+# Recording/Setting Screen Indicator
     #    Color:
     #        rgba: 1,0,1,1
     #    Ellipse:
     #        pos: (self.width/2)+(self.width*(self.page+1)), self.height/2
     #        size: root.height/9,root.height/9
 
-    #Battery Screen
+# Battery Screen Indicator
         #BMS Indicator
         Color:
             rgba: root.BMS_status
@@ -68,14 +69,14 @@
             pos: (self.width/7)+(self.width*(self.page-1)), self.height*9/32
             size: root.height/9,root.height/9
         
-    #Motor Screen
+# Motor Screen Indicator
     #    Color:
     #        rgba: 0,1,1,1
     #    Ellipse:
     #        pos: (self.width/2)+(self.width*(self.page-2)), self.height/2
     #        size: 50,50
         
-    #Misc Screen
+# Misc Screen Indicator
     #    Color:
     #        rgba: 0,1,0,1
     #    Ellipse:
@@ -102,8 +103,19 @@
         font_size: root.height/13  
         center_x: root.width*11/16
         center_y: root.height*19/20
-    
-#Home Screen 
+
+# Image Display
+    Image:
+        source: 'Inde_B.png'
+        allow_stretch: True
+        keep_ratio: True
+        center_x: root.width/5
+        center_y: root.height/4
+        size: root.width/1.5, root.height/1.5
+
+
+
+#Home Screen Data
     #Speed
     Label:
         text: root.speedstring
@@ -161,7 +173,7 @@
         center_y: root.height*10/16
         color: root.Dr_Mode_Slow_status
 
-#Battery Screen 
+#Battery Screen Data
     #Speed
     Label:
         text: root.speedstring
@@ -260,7 +272,7 @@
         center_y: root.height*3/8
         color: root.textcolor
 
-#Motor Screen
+#Motor Screen Data
     #Speed
     Label:
         text: root.MSspeedstring
@@ -395,7 +407,7 @@
         center_y: root.height*20/64
         color: root.textcolor
 
-#Setting Screen
+#Setting Screen Data
     #Speed
     Label:
         text: root.speedstring
@@ -438,7 +450,7 @@
     
 
 
-#Misc Screen
+#Misc Screen Data 
     #Speed
     Label:
         text: root.speedstring
@@ -472,3 +484,6 @@
             font_size: root.height/6
             on_press: root.nextpage()
     
+
+
+            

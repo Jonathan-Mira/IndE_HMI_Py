@@ -115,6 +115,7 @@ class IndE_Display(Widget):
             case _:
                 self.Battery_status = Blue_
 
+        #Home Screen
         if DataLog_._Brake._value:
             self.Break_status = Green_
         else:
@@ -125,7 +126,6 @@ class IndE_Display(Widget):
         else:
             self.Wind_Sheild_status = IndE_Grey
 
-        #Home Screen
         if self.speedswitch:
             self.speedstring = str(DataLog_._Speed._value) + " Km/h"
         else:
